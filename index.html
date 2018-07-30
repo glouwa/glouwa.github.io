@@ -16,6 +16,7 @@
             const hmodel = hypertree.presets.otolModel()            
             hmodel.caption = (ht, n)=> {                
                 n.precalc.txt2 = n.data.name
+                n.precalc.clickable = true
                 return n.data.name
             }
             hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json'),
