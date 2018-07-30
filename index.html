@@ -9,24 +9,9 @@
     
     <link rel="stylesheet" href="d3-hypertree-light.css" id="ldswitch">        
 
-    <script src="d3-hypertree.js"></script>
+    <script src="d3-hypertree.js"></script>    
     </head>
-    <body>
-        <style>
-        @font-face {
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 200;    
-            src: url('fonts/roboto/Roboto-Light.woff2') format('woff2');
-        }
-        body {    
-            margin: 0;
-            overflow:hidden;
-            font-family: 'Roboto';
-            font-weight:300;    
-        }
-        </style>
-
+    <body>        
         <script>
             const hmodel = hypertree.presets.otolModel()            
             hmodel.caption = (ht, n)=> {                
@@ -38,5 +23,19 @@
             new hypertree.Hypertree({ parent: document.body }, hmodel)
 
         </script>
+        <style>
+                @font-face {
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 200;    
+                    src: url('fonts/roboto/Roboto-Light.woff2') format('woff2');
+                }
+                body {    
+                    margin: 0;
+                    overflow: hidden;
+                    font-family: 'Roboto';
+                    font-weight: 300;    
+                }
+        </style>
     </body>
 </html>
