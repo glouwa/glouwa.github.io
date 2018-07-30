@@ -13,13 +13,13 @@
     </head>
     <body>
         <script>            
-            const hmodel = hypertree.presets.otol()            
+            const hmodel = hypertree.presets.otolModel()            
             hmodel.caption = (ht, n)=> {                
                 n.precalc.txt2 = n.data.name
                 return n.data.name
             }
             hmodel.dataloader = hypertree.loaders.fromFile('carnivora.d3.json'),
-            hmodel.langloader = ok=> ok()
+            hmodel.langloader = hypertree.loaders.fromFile('en.lang.json'),
             new hypertree.Hypertree({ parent: document.body }, hmodel)
 
         </script>
