@@ -15,6 +15,7 @@
         <script>
             const hmodel = hypertree.presets.otolModel()   
             hmodel.iconmap = {
+                fileName2IconUrl: ()=>null,
                 emojimap: {
                     'Homo sapiens':'🧔🏽', 
                     Pan:'🐵', 
@@ -54,6 +55,10 @@
                 font-style: normal;
                 font-weight: 200;
                 src: url('fonts/roboto/Roboto-Light.woff2') format('woff2');
+            }
+            @font-face {
+                font-family: 'NotoColorEmoji';
+                src: url('fonts/noto/NotoColorEmoji.ttf') format('truetype');
             }
             body {    
                 margin: 0;
