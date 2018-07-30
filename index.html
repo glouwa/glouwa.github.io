@@ -12,7 +12,22 @@
     <script src="d3-hypertree.js"></script>
     </head>
     <body>
-        <script>            
+        <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 200;    
+            src: url('fonts/roboto/Roboto-Light.woff2') format('woff2');
+        }
+        body {    
+            margin: 0;
+            overflow:hidden;
+            font-family: 'Roboto';
+            font-weight:300;    
+        }
+        </style>
+
+        <script>
             const hmodel = hypertree.presets.otolModel()            
             hmodel.caption = (ht, n)=> {                
                 n.precalc.txt2 = n.data.name

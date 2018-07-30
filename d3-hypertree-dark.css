@@ -111,11 +111,14 @@
     opacity: 1; } }
 
 .unitdisk-nav svg .caption-label {
-  /*transition-property: transform;
+  /*
+            //transition-property: transform;
             //transition-duration: 250ms;
             transition-duration: 0ms;
             transition-timing-function: ease-in-out;
-            transition-delay: 150ms;   */ }
+            transition-delay: 150ms;   
+            */
+  animation: fade-in 750ms ease-in-out; }
 
 .unitdisk-nav svg .caption-icon {
   font-family: 'NotoColorEmoji', Roboto;
@@ -248,7 +251,8 @@
 
 .unitdisk-nav svg .lazy.cell {
   stroke: rgba(0, 0, 0, 0.15);
-  fill: rgba(255, 204, 188, 0.03); }
+  stroke-width: .0013;
+  fill: none; }
 
 .unitdisk-nav svg .lazy.node {
   stroke: #c5c5c5;
@@ -437,6 +441,16 @@
 .render-info.data {
   bottom: 1em; }
 
+#meta > .layer-info.data {
+  position: absolute;
+  bottom: 1.2em;
+  right: .75em; }
+
+#meta > .render-info.data {
+  position: absolute;
+  bottom: 1em;
+  left: .75em; }
+
 .render-info {
   z-index: 1000;
   width: 21.2em;
@@ -559,4 +573,3 @@
     background-color: #666; }
   .render-info .bar-bg {
     background-color: #2b2929; }
-    .tool-bar { visibility: hidden; }

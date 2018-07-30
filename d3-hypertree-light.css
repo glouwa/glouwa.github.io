@@ -111,11 +111,14 @@
     opacity: 1; } }
 
 .unitdisk-nav svg .caption-label {
-  /*transition-property: transform;
+  /*
+            //transition-property: transform;
             //transition-duration: 250ms;
             transition-duration: 0ms;
             transition-timing-function: ease-in-out;
-            transition-delay: 150ms;   */ }
+            transition-delay: 150ms;   
+            */
+  animation: fade-in 750ms ease-in-out; }
 
 .unitdisk-nav svg .caption-icon {
   font-family: 'NotoColorEmoji', Roboto;
@@ -206,7 +209,7 @@
   stroke-width: 0.0013; }
 
 .unitdisk-nav svg .arc {
-  stroke: #bbb;
+  stroke: #aaa;
   fill: none; }
 
 .unitdisk-nav svg .arc-focus {
@@ -251,9 +254,9 @@
   fill: #e84f4c; }
 
 .unitdisk-nav svg .lazy.cell {
-  stroke: white;
-  stroke-width: .0028;
-  fill: rgba(33, 150, 243, 0.05); }
+  stroke: #ececec;
+  stroke-width: .00075;
+  fill: none; }
 
 .unitdisk-nav svg .lazy.node {
   stroke: rgba(159, 24, 21, 0.5); }
@@ -447,6 +450,16 @@
 .render-info.data {
   bottom: 1em; }
 
+#meta > .layer-info.data {
+  position: absolute;
+  bottom: 1.2em;
+  right: .75em; }
+
+#meta > .render-info.data {
+  position: absolute;
+  bottom: 1em;
+  left: .75em; }
+
 .render-info {
   z-index: 1000;
   width: 21.2em;
@@ -573,4 +586,3 @@
       opacity: .75; }
   .render-info .hist div {
     background-color: #ddd; }
-    .tool-bar { visibility: hidden; }
