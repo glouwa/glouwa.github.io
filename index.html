@@ -15,10 +15,12 @@
         <script>
             const hmodel = hypertree.presets.otolModel()   
             hmodel.iconmap = {
-                'Homo sapiens':'🧔🏽', 
-                Alouatta:'🙉', 
-                Cacajao:'🙈', 
-                Macaca:'🙊' 
+                emojimap: {
+                    'Homo sapiens':'🧔🏽', 
+                    Alouatta:'🙉', 
+                    Cacajao:'🙈', 
+                    Macaca:'🙊' 
+                }                
             }         
             hmodel.caption = (ht, n)=> {                
                 const w  = (!n.value || n.value==1) ? '' : n.value + ' '
