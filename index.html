@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
-    <title>Hyperbolic tree</title>
-    <meta charset="UTF-8" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="dcterms.rightsHolder" content="Copyright © 2018 Glatzhofer Michael">
-    
-    <link rel="stylesheet" href="d3-hypertree-light.css" id="ldswitch">        
+        <title>Hyperbolic tree</title>
+        <meta charset="UTF-8" />
 
-    <script src="d3-hypertree.js"></script>    
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="dcterms.rightsHolder" content="Copyright © 2018 Glatzhofer Michael">
+
+        <link rel="stylesheet" href="d3-hypertree-light.css" id="ldswitch">        
+
+        <script src="d3-hypertree.js"></script>           
     </head>
     <body>        
         <script>
@@ -18,24 +18,23 @@
                 n.precalc.txt2 = n.data.name
                 return n.data.name
             }
-            hmodel.dataloader = hypertree.loaders.fromFile('carnivora.d3.json'),
+            hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json'),
             hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json'),
             new hypertree.Hypertree({ parent: document.body }, hmodel)
-
-        </script>
+        </script>        
         <style>
-                @font-face {
-                    font-family: 'Roboto';
-                    font-style: normal;
-                    font-weight: 200;    
-                    src: url('fonts/roboto/Roboto-Light.woff2') format('woff2');
-                }
-                body {    
-                    margin: 0;
-                    overflow: hidden;
-                    font-family: 'Roboto';
-                    font-weight: 300;    
-                }
+            @font-face {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 200;    
+                src: url('fonts/roboto/Roboto-Light.woff2') format('woff2');
+            }
+            body {    
+                margin: 0;
+                overflow: hidden;
+                font-family: 'Roboto';
+                font-weight: 300;    
+            }
         </style>
     </body>
 </html>
