@@ -34,7 +34,7 @@
                 return n.data.name
             }
             hmodel.dataloader = hypertree.loaders.fromFile('carnivora.d3.json'),
-            hmodel.langloader = hypertree.loaders.fromFile('en.lang.json'),
+            hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json'),
             new hypertree.Hypertree({ parent: document.body }, hmodel)
 
         </script>
