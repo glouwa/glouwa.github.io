@@ -13,30 +13,15 @@
     </head>
     <body>
         <script>            
-            const hmodel = hypertree.presets.generatorModel()            
-            hmodel.onNodeSelect = ()=> {}
-            hmodel.layout = hypertree.layouts.layoutBergé
+            const hmodel = hypertree.presets.otol()            
             hmodel.caption = (ht, n)=> {                
                 n.precalc.txt2 = n.data.name
                 return n.data.name
             }
-            hmodel.dataloader = ok => ok({ 
-                name:'A',
-                children:[
-                    { name: 'B' },
-                    { name: 'C' },
-                    { name: 'D' },
-                    { 
-                        name: 'E',
-                        children:[
-                            { name: 'F' },
-                            { name: 'G' },
-                        ]
-                    },
-                ]
-            })
+            hmodel.dataloader = hypertree.loaders.fromFile('carnivora.d3.json'),
             hmodel.langloader = ok=> ok()
-            new hypertree.Hypertree({ parent: document.body },hmodel)            
+            new hypertree.Hypertree({ parent: document.body }, hmodel)
+
         </script>
     </body>
 </html>
