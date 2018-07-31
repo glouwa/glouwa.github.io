@@ -48,8 +48,8 @@
             hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json')
             const component = new hypertree.Hypertree({ parent: document.body }, hmodel)
             component.initPromise
-                .then(()=> new Promise((ok, err)=> ht.animateUp(ok, err)))
-                .then(()=> ht.drawDetailFrame())
+                .then(()=> new Promise((ok, err)=> component.animateUp(ok, err)))
+                .then(()=> component.drawDetailFrame())
         </script>        
         <style>
             @font-face {
