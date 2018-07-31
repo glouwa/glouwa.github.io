@@ -28,7 +28,7 @@
             hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json')
             hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json')
             hmodel.filter.maxlabels = 15
-            hmodel.captionFont = '9px Roboto'
+            hmodel.captionFont = '9.75px Roboto'
 
             const component = new hypertree.Hypertree({ parent: document.body }, hmodel)
             component.initPromise
