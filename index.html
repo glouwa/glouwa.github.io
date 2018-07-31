@@ -25,7 +25,7 @@
                     Cacajao:'🙈', 
                     Macaca:'🙊'               
                 }                
-            }         
+            }
             hmodel.caption = (ht, n)=> {                
                 const w  = (!n.value || n.value==1) ? '' : n.value + ' '
                 const id = ( n.data && n.data.name) ? n.data.name : ''
@@ -48,6 +48,8 @@
             hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json'),
             hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json'),
             new hypertree.Hypertree({ parent: document.body }, hmodel)
+                .then(()=> new Promise((ok, err)=> ht.animateUp(ok, err)))
+                .then(()=> ht.drawDetailFrame())
         </script>        
         <style>
             @font-face {
