@@ -13019,7 +13019,7 @@ class Hypertree {
             filesize: dl,
             nodecount: ncount - 1
         };
-        //this.view_.html.querySelector('.preloader').innerHTML = ''
+        this.view_.html.querySelector('.preloader').innerHTML = '';
         return this.data;
     }
     findInitλ_() {
