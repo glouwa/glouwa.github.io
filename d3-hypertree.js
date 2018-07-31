@@ -12768,18 +12768,9 @@ const hyperbolic_math_4 = __webpack_require__(0);
 let globelhtid = 0;
 const π = Math.PI;
 const htmlpreloader = `
-    <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-red-only">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
     </div>`;
 const bubbleSvgDef_old = `<defs>
         <radialGradient id="exampleGradient">            
@@ -13026,7 +13017,7 @@ class Hypertree {
             filesize: dl,
             nodecount: ncount - 1
         };
-        //this.view_.html.querySelector('.preloader').innerHTML = ''
+        this.view_.html.querySelector('.preloader').innerHTML = '';
         return this.data;
     }
     findInitλ_() {
@@ -38942,7 +38933,7 @@ const modelBase = () => ({
     langmap: null,
     caption: (ht, n) => undefined,
     captionBackground: 'all',
-    captionFont: '.002em Roboto',
+    captionFont: '6.5px Roboto',
     objects: {
         selections: [],
         pathes: [],
@@ -38967,7 +38958,7 @@ const modelBase = () => ({
         cullingWeight: { min: 200, max: 400 },
         focusExtension: 1.6,
         maxFocusRadius: .85,
-        maxlabels: 10,
+        maxlabels: 25,
         wikiRadius: .85,
     },
     geometry: {
