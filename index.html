@@ -8,7 +8,6 @@
         <meta name="dcterms.rightsHolder" content="Copyright © 2018 Glatzhofer Michael">
 
         <link rel="stylesheet" href="d3-hypertree-light.css" id="ldswitch">        
-
         <script src="d3-hypertree.js"></script>           
     </head>
     <body>        
@@ -26,7 +25,7 @@
                     Macaca:'🙊'               
                 }                
             }
-            hmodel.caption = (ht, n)=> {                
+            hmodel.caption = (ht, n)=> {
                 const w  = (!n.value || n.value==1) ? '' : n.value + ' '
                 const id = ( n.data && n.data.name) ? n.data.name : ''
                 
@@ -45,9 +44,10 @@
                 else 
                     return undefined
             }
-            hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json'),
-            hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json'),
-            new hypertree.Hypertree({ parent: document.body }, hmodel)
+            hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json')
+            hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json')
+            const component = new hypertree.Hypertree({ parent: document.body }, hmodel)
+            component.initPromise
                 .then(()=> new Promise((ok, err)=> ht.animateUp(ok, err)))
                 .then(()=> ht.drawDetailFrame())
         </script>        
