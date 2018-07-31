@@ -13154,7 +13154,7 @@ class Hypertree {
             || (this.virtualCanvas = document.createElement("canvas"));
         var context = this.virtualCanvasContext
             || (this.virtualCanvasContext = canvas.getContext("2d"));
-        context.font = ".002em Roboto";
+        context.font = this.args.captionFont;
         for (var n of hyperbolic_math_1.dfsFlat(this.data, n => true)) {
             if (n.precalc.txt2) {
                 const metrics = context.measureText(n.precalc.txt2);
@@ -38942,6 +38942,7 @@ const modelBase = () => ({
     langmap: null,
     caption: (ht, n) => undefined,
     captionBackground: 'all',
+    captionFont: '.002em Roboto',
     objects: {
         selections: [],
         pathes: [],

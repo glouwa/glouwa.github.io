@@ -25,28 +25,10 @@
                     Macaca:'🙊'               
                 }                
             }
-            hmodel.caption = (ht, n)=> {
-                const w  = (!n.value || n.value==1) ? '' : n.value + ' '
-                const id = ( n.data && n.data.name) ? n.data.name : ''
-                
-                const l = ht.langMap && ht.langMap[id] ? '𝐖 ' + ht.langMap[id] : ''                        
-                const i  = ht.args.iconmap ? ht.args.iconmap.emojimap[id] : ''
-
-                n.precalc.icon = i                     
-                n.precalc.wiki = l   
-                n.precalc.txt = i || l || id
-                n.precalc.txt2 = l || id
-                
-                n.precalc.clickable = Boolean(l)
-
-                if (n.precalc.txt) 
-                    return n.precalc.txt
-                else 
-                    return undefined
-            }
             hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json')
             hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json')
             hmodel.filter.maxlabels = 15
+            hmodel.captionFont = '.004em Roboto'
 
             const component = new hypertree.Hypertree({ parent: document.body }, hmodel)
             component.initPromise
