@@ -50,10 +50,11 @@
       width: 3em;
       height: 3em; }
   .unitdisk-nav .spinner {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     position: relative;
-    margin: 40% auto; }
+    top: 50%;
+    margin: 0 50%; }
   .unitdisk-nav .double-bounce1, .unitdisk-nav .double-bounce2 {
     width: 100%;
     height: 100%;
@@ -61,8 +62,8 @@
     background-color: #333;
     opacity: 0.6;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -50%;
+    left: -50%;
     -webkit-animation: sk-bounce 1.0s infinite ease-in-out;
     animation: sk-bounce 1.0s infinite ease-in-out; }
   .unitdisk-nav .double-bounce2 {

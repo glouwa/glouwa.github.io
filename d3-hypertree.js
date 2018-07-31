@@ -12727,11 +12727,13 @@ function doLabelStuff(ud, cache) {
     //    .filter((e:N)=> e.pathes.partof && e.pathes.partof.length)
     var stdlabels = labels
         //    .filter(e=> pathLabels.indexOf(e) === -1)        
-        .filter(e => (e.cachep.r <= ud.view.hypertree.args.filter.wikiRadius && e.precalc.label.startsWith('𝐖'))
-        || !e.parent
-        || !e.isOutλ);
+        .filter(e => {
+        return (e.cachep.r <= ud.view.hypertree.args.filter.wikiRadius && e.precalc.label.startsWith('𝐖'))
+            || !e.parent
+            || !e.isOutλ;
+    });
     //.sort((a, b)=> a.label.length - b.label.length)
-    //.slice(0, 15)        
+    //.slice(0, 15)
     let damping = 1;
     while (stdlabels.length > ud.view.hypertree.args.filter.maxlabels) {
         stdlabels = stdlabels.filter(n => (n.value > (n.minWeight * damping))
@@ -12790,7 +12792,7 @@ const bubbleSvgDef = `<defs>
         </radialGradient>
     </defs>`;
 const hypertreehtml = `<div class="unitdisk-nav">        
-        <svg width="calc(100% - 3em)" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="-0 0 1000 1000">
+        <svg width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="-0 0 1000 1000">
             ${bubbleSvgDef}
         </svg>
         <div class="preloader"></div>
@@ -12934,7 +12936,7 @@ class Hypertree {
         this.unitdisk = new this.args.geometry.decorator({
             parent: udparent,
             className: 'unitDisc',
-            position: 'translate(500,520) scale(470)',
+            position: 'translate(500,500) scale(480)',
             hypertree: this,
         }, {
             data: null,
@@ -13017,7 +13019,7 @@ class Hypertree {
             filesize: dl,
             nodecount: ncount - 1
         };
-        this.view_.html.querySelector('.preloader').innerHTML = '';
+        //this.view_.html.querySelector('.preloader').innerHTML = ''
         return this.data;
     }
     findInitλ_() {
@@ -19620,7 +19622,7 @@ exports.navBackgroundLayers = [
     (v, ud) => new link_layer_1.ArcLayer(v, {
         name: 'link-arcs',
         className: 'arc',
-        curvature: '-',
+        curvature: ud.view.hypertree.args.geometry.linkCurvature,
         data: () => ud.cache.links,
         nodePos: (n) => (n.layoutReference || n.layout).z,
         nodePosStr: (n) => (n.layoutReference || n.layout).zStrCache,
@@ -19630,7 +19632,7 @@ exports.navBackgroundLayers = [
     (v, ud) => new link_layer_1.ArcLayer(v, {
         name: 'link-arcs-focus',
         className: 'arc-focus',
-        curvature: '-',
+        curvature: ud.view.hypertree.args.geometry.linkCurvature,
         data: () => ud.cache.links.filter(n => n.parent.cachep.r < .6),
         nodePos: (n) => (n.layoutReference || n.layout).z,
         nodePosStr: (n) => (n.layoutReference || n.layout).zStrCache,
@@ -19640,7 +19642,7 @@ exports.navBackgroundLayers = [
     (v, ud) => new link_layer_1.ArcLayer(v, {
         name: 'path-arcs',
         className: 'arc',
-        curvature: '-',
+        curvature: ud.view.hypertree.args.geometry.linkCurvature,
         data: () => ud.cache.paths,
         nodePos: (n) => (n.layoutReference || n.layout).z,
         nodePosStr: (n) => (n.layoutReference || n.layout).zStrCache,
@@ -33784,7 +33786,7 @@ const hypertreehtml = `<div class="unitdisk-nav">
             ${btn('btn-path-center', 'add_circle')}
         </div> 
         
-        <svg width="calc(100% - 3em)" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="-0 0 1000 1000">
+        <svg width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="-0 0 1000 1000">
             ${bubbleSvgDef}
         </svg>
         <div class="preloader"></div>
@@ -33887,7 +33889,7 @@ class HypertreeEx extends hypertree_1.Hypertree {
         this.view_.btnNav.onclick = () => this.api['toggleNav']();
         this.view_.btnSize.onclick = () => {
             const view = [
-                'translate(500,520) scale(470)',
+                'translate(500,500) scale(480)',
                 'translate(500,520) scale(490)',
                 'translate(500,520) scale(620, 490)',
                 'translate(500,520) scale(720, 590)',
@@ -38971,7 +38973,7 @@ const modelBase = () => ({
         nodeScale: nodeScale,
         nodeFilter: hasCircle,
         linkWidth: arcWidth,
-        linkCurvature: '-',
+        linkCurvature: '+',
         transformation: new d3_hypertree_1.HyperbolicTransformation({
             P: { re: 0, im: .5 },
             θ: { re: 1, im: 0 },
@@ -39035,18 +39037,22 @@ exports.presets = {
         const model = exports.presets.otolModel();
         model.geometry.nodeRadius = nodeInitRNoInner(.0001);
         model.geometry.nodeScale = nodeScaleNoInner;
+        model.filter.focusExtension = 2.5;
         model.geometry.nodeFilter = n => true;
         model.layout.initMaxλ = .6;
         model.interaction.onNodeSelect = s => { console.log('###########', s); };
         model.caption = (ht, n) => {
             const id = (n.data && n.data.name) ? n.data.name : '';
+            n.precalc.clickable = n.parent
+                && id !== 'Open-Tree-of-Life'
+                && id !== 'Generators'
+                && id !== 'Example-files';
+            if (!n.precalc.clickable)
+                return undefined;
             const i = ht.args.iconmap.emojimap[id];
             n.precalc.icon = i;
             n.precalc.txt = i || id;
-            n.precalc.clickable = (n.parent
-                && n.parent.data
-                && (n.parent.data.name === 'Open-Tree-of-Life'));
-            n.precalc.txt2 = n.precalc.clickable ? id : '';
+            n.precalc.txt2 = id;
             if (n.precalc.txt)
                 return n.precalc.txt;
             else
