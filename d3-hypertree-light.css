@@ -234,8 +234,9 @@
   opacity: .7; }
 
 .unitdisk-nav svg .label-link {
-  stroke: #2196F3;
-  stroke-width: .00075;
+  /*stroke: #2196F3;            */
+  stroke: #999;
+  stroke-width: .001;
   stroke-dasharray: .01, .01; }
 
 .unitdisk-nav svg .root {
@@ -312,6 +313,11 @@
   fill: none;
   stroke: #1790f2;
   stroke-width: .0005; }
+
+.unitdisk-nav svg .zerozero-circle {
+  fill: none;
+  stroke: #555;
+  stroke-width: .1; }
 
 .unitdisk-nav svg .nav-parameter-disc .node {
   fill: white;

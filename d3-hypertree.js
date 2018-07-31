@@ -1126,8 +1126,12 @@ class D3UpdatePattern {
             .call(this.args.updateTransform)
             .call(this.args.updateColor);
         // extrashit
-        //if (this.args.name === 'labels-force')
-        //    this.addTextBackgroundRects()
+        if (this.args.name === 'labels-force' &&
+            true)
+            this.addTextBackgroundRects();
+        if (this.args.name === 'labels' &&
+            true)
+            this.addTextBackgroundRects();
     }
     addTextBackgroundRects() {
         this.mainSvgGroup.selectAll('rect').remove();
@@ -4680,6 +4684,7 @@ class UnitDiskNav {
             nodeScale: args.nodeScale,
             nodeFilter: args.nodeFilter,
             linkWidth: args.linkWidth,
+            linkCurvature: args.linkCurvature,
             layers: layers_background_1.navBackgroundLayers,
             clipRadius: 1
         });
@@ -4720,6 +4725,7 @@ class UnitDiskNav {
             nodeScale: () => 1,
             nodeFilter: () => true,
             linkWidth: args.linkWidth,
+            linkCurvature: args.linkCurvature,
             clipRadius: 1.7
         });
     }
@@ -12951,7 +12957,8 @@ class Hypertree {
             nodeRadius: this.args.geometry.nodeRadius,
             nodeScale: this.args.geometry.nodeScale,
             nodeFilter: this.args.geometry.nodeFilter,
-            linkWidth: this.args.geometry.linkWidth
+            linkWidth: this.args.geometry.linkWidth,
+            linkCurvature: this.args.geometry.linkCurvature
         });
     }
     //########################################################################################################
@@ -13019,7 +13026,7 @@ class Hypertree {
             filesize: dl,
             nodecount: ncount - 1
         };
-        this.view_.html.querySelector('.preloader').innerHTML = '';
+        //this.view_.html.querySelector('.preloader').innerHTML = ''
         return this.data;
     }
     findInitλ_() {
@@ -19889,7 +19896,7 @@ class FocusLayer {
             layer: this,
             data: [1],
             name: this.name,
-            className: 'focus-circle',
+            className: this.args.className || 'focus-circle',
             elementType: 'circle',
             create: s => s.attr('r', 1),
             updateColor: s => { },
@@ -20160,7 +20167,6 @@ const image_layer_1 = __webpack_require__(232);
 const focus_layer_1 = __webpack_require__(234);
 const d3_hypertree_1 = __webpack_require__(80);
 var nodeRadiusOffset = (ls) => (d) => hyperbolic_math_1.CptoCk({ θ: d.cachep.θ, r: ls.args.nodeRadius(ls, d) * 2 });
-const curvature = '-'; // + - 0 l
 exports.layerSrc = [
     // nodes
     // nodes-leafs
@@ -20172,29 +20178,29 @@ exports.layerSrc = [
     // interaction-hammer
     (v, ud) => new background_layer_1.BackgroundLayer(v, {}),
     (v, ud) => new focus_layer_1.FocusLayer(v, {
-        invisible: false,
-        hideOnDrag: false,
+        invisible: true,
+        hideOnDrag: true,
         name: 'culling-r',
         r: () => ud.view.hypertree.args.filter.cullingRadius,
         center: () => '0 0'
     }),
     (v, ud) => new focus_layer_1.FocusLayer(v, {
-        invisible: false,
-        hideOnDrag: false,
+        invisible: true,
+        hideOnDrag: true,
         name: 'mouse-r',
         r: () => ud.view.hypertree.args.interaction.mouseRadius,
         center: () => '0 0'
     }),
     (v, ud) => new focus_layer_1.FocusLayer(v, {
-        invisible: false,
-        hideOnDrag: false,
+        invisible: true,
+        hideOnDrag: true,
         name: 'focus-r',
         r: () => ud.cache.focusR,
         center: () => `${(ud.pinchcenter || { re: 0 }).re} ${(ud.pinchcenter || { im: 0 }).im}`
     }),
     (v, ud) => new focus_layer_1.FocusLayer(v, {
-        invisible: false,
-        hideOnDrag: false,
+        invisible: true,
+        hideOnDrag: true,
         name: 'labels-r-𝐖',
         r: () => ud.view.hypertree.args.filter.wikiRadius,
         center: () => '0 0'
@@ -20208,6 +20214,7 @@ exports.layerSrc = [
     }),
     (v, ud) => new focus_layer_1.FocusLayer(v, {
         invisible: false,
+        className: 'zerozero-circle',
         name: '(0,0)',
         r: () => .004,
         center: () => '0 0'
@@ -20254,7 +20261,7 @@ exports.layerSrc = [
         hideOnDrag: false,
         name: 'path-arcs',
         className: 'arc',
-        curvature: curvature,
+        curvature: ud.view.hypertree.args.geometry.linkCurvature,
         data: () => ud.cache.paths,
         nodePos: n => n.cache,
         nodePosStr: n => n.strCache,
@@ -20268,7 +20275,7 @@ exports.layerSrc = [
         hideOnDrag: true,
         name: 'path-lines',
         className: 'arc',
-        curvature: curvature,
+        curvature: ud.view.hypertree.args.geometry.linkCurvature,
         data: () => ud.cache.paths,
         nodePos: n => n.cache,
         nodePosStr: n => n.strCache,
@@ -20282,7 +20289,7 @@ exports.layerSrc = [
         hideOnDrag: false,
         name: 'link-arcs',
         className: 'arc',
-        curvature: curvature,
+        curvature: ud.view.hypertree.args.geometry.linkCurvature,
         clip: '#circle-clip' + ud.args.clipRadius,
         data: () => ud.cache.links,
         nodePos: n => n.cache,
@@ -20299,7 +20306,7 @@ exports.layerSrc = [
         hideOnDrag: true,
         name: 'link-lines',
         className: 'arc',
-        curvature: curvature,
+        curvature: ud.view.hypertree.args.geometry.linkCurvature,
         clip: '#circle-clip' + ud.args.clipRadius,
         data: () => ud.cache.links,
         nodePos: n => n.cache,
@@ -38934,6 +38941,7 @@ const modelBase = () => ({
     data: null,
     langmap: null,
     caption: (ht, n) => undefined,
+    captionBackground: 'all',
     objects: {
         selections: [],
         pathes: [],
@@ -38958,7 +38966,7 @@ const modelBase = () => ({
         cullingWeight: { min: 200, max: 400 },
         focusExtension: 1.6,
         maxFocusRadius: .85,
-        maxlabels: 25,
+        maxlabels: 10,
         wikiRadius: .85,
     },
     geometry: {
@@ -38971,6 +38979,7 @@ const modelBase = () => ({
         nodeScale: nodeScale,
         nodeFilter: hasCircle,
         linkWidth: arcWidth,
+        linkCurvature: '-',
         transformation: new d3_hypertree_1.HyperbolicTransformation({
             P: { re: 0, im: .5 },
             θ: { re: 1, im: 0 },

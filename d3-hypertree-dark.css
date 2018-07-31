@@ -230,9 +230,9 @@
   fill: rgba(17, 17, 17, 0.4); }
 
 .unitdisk-nav svg .label-link {
-  stroke: #666;
+  stroke: #000;
   stroke-width: .001;
-  stroke-dasharray: .01, .01; }
+  stroke-dasharray: .025, .01; }
 
 .unitdisk-nav svg .root {
   stroke: #eed500;
@@ -308,6 +308,11 @@
   fill: none;
   stroke: #1790f2;
   stroke-width: .0008; }
+
+.unitdisk-nav svg .zerozero-circle {
+  fill: none;
+  stroke: #000;
+  stroke-width: .1; }
 
 .unitdisk-nav svg .nav-parameter-disc .node {
   fill: none;
