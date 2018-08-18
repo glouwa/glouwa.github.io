@@ -10,27 +10,39 @@
         <link rel="stylesheet" href="d3-hypertree-light.css" id="ldswitch">        
         <script src="d3-hypertree.js"></script>           
     </head>
-    <body>        
-        <script>
-            const hmodel = hypertree.presets.otolModel()   
-            hmodel.iconmap = {
-                fileName2IconUrl: ()=>null,
-                emojimap: {
-                    'Homo sapiens':'🧔🏽', 
-                    Pan:'🐵', 
-                    Gorilla:'🦍',
-                    Haplorrhini:'🐒',
-                    Alouatta:'🙉', 
-                    Cacajao:'🙈', 
-                    Macaca:'🙊'               
-                }
-            }
-            hmodel.dataloader = hypertree.loaders.fromFile('primates.d3.json')
-            hmodel.langloader = hypertree.loaders.fromLangFile('en.lang.json')
-            hmodel.filter.maxlabels = 12
-            hmodel.captionFont = '9.75px Roboto'
+    <body>
+        <script>    
+            var ua = window.navigator.userAgent
+            var msie = ua.indexOf("MSIE ")
 
-            const component = new hypertree.Hypertree({ parent: document.body }, hmodel)
+            const emojimap = {
+                'Homo sapiens':'🧔🏽', 
+                Pan:'🐵', 
+                Gorilla:'🦍',
+                Haplorrhini:'🐒',
+                Alouatta:'🙉', 
+                Cacajao:'🙈', 
+                Macaca:'🙊'
+            }            
+            const component = new hyt.Hypertree(
+                { parent: document.body },
+                {
+                    dataloader: hyt.loaders.fromFile('primates.d3.json'),
+                    langloader: hyt.loaders.fromLangFile('en.lang.json'),
+                    langInitBFS: (ht, n)=> {
+                        const id = n.data.name              
+                        n.precalc.label = id
+                        n.precalc.icon = emojimap[id]
+                    },
+                    filter: {
+                        maxlabels: 12
+                    },                    
+                    geometry: {
+                        captionFont: '12px Roboto',
+                        captionHeight: .09
+                    }
+                }
+            )
             component.initPromise
                 .then(()=> new Promise((ok, err)=> component.animateUp(ok, err)))
                 .then(()=> component.drawDetailFrame())
@@ -51,7 +63,7 @@
                 overflow: hidden;
                 font-family: 'Roboto';
                 font-weight: 300;
-                font-size: 1.5em;
+                font-size: 1.8em;
             }
             .unitdisk-nav svg {                
                 left: 0;                 
